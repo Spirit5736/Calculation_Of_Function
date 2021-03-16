@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Calculation_of_functions.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Data;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 namespace Calculation_of_functions
 {
     /// <summary>
@@ -23,6 +27,9 @@ namespace Calculation_of_functions
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new ViewModelFormula();          
         }
+        
+
     }
 }
