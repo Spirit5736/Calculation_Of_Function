@@ -37,24 +37,24 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Column="1" Grid.ColumnSpan="2">
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" DataContext="{Binding SelectedFormula}">
             <TextBlock Text="Выбранная формула"/>
             <TextBlock Text="Название" />
-            <TextBox x:Name ="TextBoxFormulaName" DataContext="{Binding SelectedFormula}" Text ="{Binding Title, Mode=OneWay}" />
+            <TextBox x:Name ="TextBoxFormulaName" Text ="{Binding Title, Mode=OneWay}" />
             <TextBlock Text="Формула" />
-            <TextBox DataContext="{Binding SelectedFormula}" Text="{Binding FormulaOfFunction, Mode=OneWay}" />
+            <TextBox Text="{Binding FormulaOfFunction, Mode=OneWay}" />
             <TextBlock Text="Коэффициент a" />
-            <TextBox x:Name ="CoefficientATextBox" Text="{Binding CoefficientA , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name ="CoefficientATextBox" Text="{Binding CoefficientA , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Коэффициент b" />
             <TextBox x:Name="CoefficientBTextBox"  Text="{Binding CoefficientB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Коэффициент c" />
-            <ComboBox x:Name ="CoefficientСComboBox" DataContext="{Binding SelectedFormula}" ItemsSource="{Binding CoefficientC}" />
+            <ComboBox x:Name ="CoefficientСComboBox" SelectedItem="{Binding CoefficientC}"   ItemsSource="{Binding CoefficientsC}" />
             <TextBlock Text="X" />
             <TextBox Text="{Binding ValueX, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Y" />
             <TextBox Text="{Binding ValueY, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock HorizontalAlignment="Center" Text="Результат" Grid.Column="1" Margin="0,5,0,10" Width="86" Grid.Row="1"/>
-            <TextBox Grid.Row="2" Grid.ColumnSpan="3" Text = "{Binding ValueFXY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0" />
+            <TextBox Grid.Row="2" Grid.ColumnSpan="3" Text = "{Binding ValueFXY, Mode =TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0" IsReadOnly="True" />
         </StackPanel>
 
     </Grid>

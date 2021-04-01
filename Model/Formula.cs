@@ -5,13 +5,14 @@ using System;
 
 namespace Calculation_of_functions
 {
-    public class Formula : INotifyPropertyChanged
+    public class Formula /*: INotifyPropertyChanged*/
     {
         private string title;
         private string formulaOfFunction;
         private double coefficientA;
         private double coefficientB;
-        private int[] coefficientC;
+        private int coefficientC;
+        private int[] coefficientsC = new int[] { 0, 1, 2, 3, };
         private double valueX; 
         private double valueY;
         private double valueFXY;
@@ -25,7 +26,7 @@ namespace Calculation_of_functions
             set
             {
                 title = value;
-                OnPropertyChanged("Title");
+                //OnPropertyChanged("Title");
             }
         }
 
@@ -35,7 +36,7 @@ namespace Calculation_of_functions
             set
             {
                 formulaOfFunction = value;
-                OnPropertyChanged("FormulaOfFunction");
+                //OnPropertyChanged("FormulaOfFunction");
             }
         }
 
@@ -45,7 +46,7 @@ namespace Calculation_of_functions
             set
             {
                 coefficientA = value;
-                OnPropertyChanged("CoefficientA");
+                //OnPropertyChanged("CoefficientA");
             }
         }
 
@@ -55,17 +56,26 @@ namespace Calculation_of_functions
             set
             {
                 coefficientB = value;
-                OnPropertyChanged("CoefficientB");
+                //OnPropertyChanged("CoefficientB");
             }
         }
 
-        public int[] CoefficientC
+        public int CoefficientC
         {
             get { return coefficientC; }
             set
             {
-                coefficientC = value; ;
-                OnPropertyChanged("CoefficientC");
+                coefficientC = value;
+                //OnPropertyChanged("CoefficientC");
+            }
+        }
+        public int[] CoefficientsC
+        {
+            get { return coefficientsC; }
+            set
+            {
+               coefficientsC = value;
+                //OnPropertyChanged("CoefficientC");
             }
         }
 
@@ -75,7 +85,7 @@ namespace Calculation_of_functions
             set
             {
                 valueX = value;
-                OnPropertyChanged("ValueX");
+                //OnPropertyChanged("ValueX");
             }
         }
 
@@ -85,7 +95,7 @@ namespace Calculation_of_functions
             set
             {
                 valueY = value;
-                OnPropertyChanged("ValueY");
+                //OnPropertyChanged("ValueY");
             }
         }
 
@@ -94,57 +104,19 @@ namespace Calculation_of_functions
             get { return valueFXY; }
             set
             {
-                if (Title == "Линейная функция")
-                {
-                    valueFXY = valueX+valueY;
-                }
-               
-                OnPropertyChanged("ValueFXY");
+                valueFXY = ValueX+ValueY;
+
+                //OnPropertyChanged("ValueFXY");
             }
         }
 
-        public double LinearFunction()
+        public int Degree { get; set; }
+
+        public double CalculateOfFunction()
         {
             //f(x, y) = ax + by^0 + c
-            valueFXY = Math.Pow(coefficientA * valueX, 1) + Math.Pow(coefficientB * valueY, 0) + coefficientC[0];
+            valueFXY = Math.Pow(coefficientA * valueX, Degree) + Math.Pow(coefficientB * valueY, Degree-1) + coefficientC;
             return valueFXY;
         }
-
-        public double QuadraticFunction()
-        {
-            //f(x, y) = ax^3 + by^2 + c
-            double valueFXY = Math.Pow(coefficientA * valueX, 2) + Math.Pow(coefficientB * valueY, 1) + coefficientC[0];
-            return valueFXY;
-        }
-
-        public double QubicFunction()
-        {
-            //f(x, y) = ax ^ 3 + by ^ 2 + c"
-            double valueFXY = Math.Pow(coefficientA * valueX, 3) + Math.Pow(coefficientB * valueY, 2) + coefficientC[0];
-            return valueFXY;
-        }
-
-        public double FourthDegreeFunction()
-        {
-            //f(x, y) = ax ^ 4 + by ^ 3 + c"
-            double valueFXY = Math.Pow(coefficientA * valueX, 4) + Math.Pow(coefficientB * valueY, 3) + coefficientC[0];
-            return valueFXY;
-        }
-
-        public double FifthDegreeFunction()
-        {
-            //f(x, y) = ax ^ 5 + by ^ 4 + c"
-            double valueFXY = Math.Pow(coefficientA * valueX, 5) + Math.Pow(coefficientB * valueY, 4) + coefficientC[0];
-            return valueFXY;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
-
-
     }
 }

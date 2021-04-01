@@ -27,7 +27,7 @@ namespace Calculation_of_functions
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModelFormula();          
+            DataContext = new MainWindowViewModel();          
         }
         
 

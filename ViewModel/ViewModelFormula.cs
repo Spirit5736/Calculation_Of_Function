@@ -22,48 +22,116 @@ using System.Data;
 
 namespace Calculation_of_functions.ViewModel 
 {
-    public class ViewModelFormula : INotifyPropertyChanged
+    public class ViewModelFormula : BaseViewModel
     {
-        private Formula selectedFormula;
-        
-        
+        private string title;
+        private string formulaOfFunction;
+        private double coefficientA;
+        private double coefficientB;
+        private int coefficientC;
+        private int[] coefficientsC = new int[] { 0, 1, 2, 3,};
+        private double valueX;
+        private double valueY;
+        private double valueFXY;
 
-        public ObservableCollection<Formula> Formulas { get; set; }
-        public List<Formula> DatagridFormulas { get; set; }
-        public Formula SelectedFormula
+
+        public string Title
         {
-            get { return selectedFormula; }
+            get { return title; }
             set
             {
-                selectedFormula = value;
-                OnPropertyChanged("SelectedFormula");
+                title = value;
+                OnPropertyChanged("Title");
             }
         }
 
-        public ViewModelFormula()
+        public string FormulaOfFunction
         {
-            Formulas = new ObservableCollection<Formula>
+            get { return formulaOfFunction; }
+            set
             {
-                new Formula {Title="Линейная функция", FormulaOfFunction ="f(x, y) = ax + by^0 + c", CoefficientC = new int[] { 1, 2, 3, 4, 5 }},
-                new Formula {Title="Квадратичная функция", FormulaOfFunction="f(x, y) = ax^2 + by^1 + c", CoefficientC = new int[] { 10, 20, 30, 40, 50 }},
-                new Formula {Title="Кубическая функция", FormulaOfFunction="f(x, y) = ax^3 + by^2 + c", CoefficientC = new int[] { 100, 200, 300, 400, 500 }},
-                new Formula {Title="Функция 4-ой степени", FormulaOfFunction="f(x, y) = ax^4 + by^3 + c", CoefficientC = new int[] { 1000, 2000, 3000, 4000, 5000 }},
-                new Formula {Title="Функция 5-ой степени", FormulaOfFunction="f(x, y) = ax^5 + by^4 + c", CoefficientC = new int[] { 10000, 20000, 30000, 40000, 50000 }},
-            };  
+                formulaOfFunction = value;
+                OnPropertyChanged("FormulaOfFunction");
+            }
         }
 
-        
-        
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        public double CoefficientA
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-
+            get { return coefficientA; }
+            set
+            {
+                coefficientA = value;
+                OnPropertyChanged("CoefficientA");
+            }
         }
 
+        public double CoefficientB
+        {
+            get { return coefficientB; }
+            set
+            {
+                coefficientB = value;
+                OnPropertyChanged("CoefficientB");
+            }
+        }
+
+        public int CoefficientC
+        {
+            get { return coefficientC; }
+            set
+            {
+                coefficientC = value ;
+                OnPropertyChanged("CoefficientC");
+            }
+        }
+        public int[] CoefficientsC
+        {
+            get { return coefficientsC; }
+            set
+            {
+                coefficientsC = value;
+                OnPropertyChanged("CoefficientsC");
+            }
+        }
+
+        public double ValueX
+        {
+            get { return valueX; }
+            set
+            {
+                valueX = value;
+                OnPropertyChanged("ValueX");
+            }
+        }
+
+        public double ValueY
+        {
+            get { return valueY; }
+            set
+            {
+                valueY = value;
+                OnPropertyChanged("ValueY");
+            }
+        }
+
+        public double ValueFXY
+        {
+            get { return valueFXY; }
+            set
+            {
+                valueFXY = ValueX + ValueY;
+                OnPropertyChanged("ValueFXY");
+               
+
+            }
+        }
+        public int Degree { get; set; }
+        public double CalculateOfFunction()
+        {
+            //f(x, y) = ax + by^0 + c
+            valueFXY = Math.Pow(coefficientA * valueX, Degree) + Math.Pow(coefficientB * valueY, Degree - 1);
+            return valueFXY;
+        }
     }
 
 }
